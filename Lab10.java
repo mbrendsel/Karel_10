@@ -1,8 +1,8 @@
 /**
  * An algorithm helps an Athlete solve a maze, perhaps by keeping one hand against a wall.
  * 
- * @author <...>
- * @version <...>
+ * @monica
+ * @12/7/14
  *
  */
 
