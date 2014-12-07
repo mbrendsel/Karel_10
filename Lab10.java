@@ -7,35 +7,39 @@
  */
 
 import edu.fcps.karel2.Display; 
-
-import edu.fcps.karel2.Display; 
 import javax.swing.JOptionPane;
 
 public class Lab10 {
 	 
 	 public static void main(String[] args) {
-		 String number = JOptionPane.showInputDialog("Which maze map? Put number (1, 2 or 3).");
-		 Display.openWorld("maps/maze" + number + ".map");
+		 String map = JOptionPane.showInputDialog("Which map?");
+		 Display.openWorld("maps/"+map+".map");
 		 Display.setSize(10, 10);
-		 Display.setSpeed(10);
 		 Athlete athena = new Athlete(1, 1, Display.NORTH, Display.INFINITY);
-		 while(!athena.nextToABeeper()) {
-            clearMaze(athena);
-       }
+		 clearMaze(athena);
 	 }
 	 
 	 public static void clearMaze(Athlete arg) {
-		 if(arg.rightIsClear()) {
-            arg.turnRight();
-            arg.move();
-       } else if(arg.frontIsClear()) {
-            arg.move();
-       } else if(arg.leftIsClear()) {
-            arg.turnLeft();
-            arg.move();
-       } else {
-            arg.turnAround();
-            arg.move();
+	 while (!arg.nextToABeeper()){
+       while (!arg.frontIsClear()&&!arg.leftIsClear()&&!arg.rightIsClear()){
+       arg.turnAround();
+       arg.move();
        }
-	 }
+       while (arg.frontIsClear()&&!arg.leftIsClear()){
+       arg.move();
+       }
+       while (arg.frontIsClear()&&arg.leftIsClear()&&!arg.rightIsClear()){
+       arg.turnLeft();
+       arg.move();
+       }
+       while (!arg.frontIsClear()&&!arg.leftIsClear()&&arg.rightIsClear()){
+       arg.turnRight();
+       arg.move();
+       }
+       while (!arg.frontIsClear()&&arg.leftIsClear()){
+       arg.turnLeft();
+       arg.move();
+       }
+    }
+ }
  }
